@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Now | Bean & Brew</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="menu-page">
+  <header>
+    <div class="container">
+      <div class="branding">
+        <a href="index.html" class="logo-link">
+            <span class="logo-wrapper">
+                <img src="images/logo.png" alt="Bean & Brew Logo" class="logo-img">
+                <h1 class="logo">Bean & Brew</h1>
+            </span>
+        </a>
+      </div>
+    
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <nav id="nav-menu" class="nav-menu hidden">
+      <ul>
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order.html">Order Now</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    </div>
+  </header>
+
+   <!-- Ordering Section -->
+  <main class="order-container">
+    <section class="order-menu">
+      <h2>Order Your Favorites</h2>
+      
+      <!-- Drinks Section -->
+      <section class="order-section drinks-card">
+        <h5>☕ Coffee & Beverages</h5>
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Drink</th>
+              <th>Your Order</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Espresso</td>
+              <td><input type="number" min="0" class="order-input" data-name="Espresso" data-price="2.50"/></td>
+              <td>$2.50</td>
+            </tr>
+            <tr>
+              <td>Cappuccino</td>
+              <td><input type="number" min="0" class="order-input" data-name="Cappuccino" data-price="3.50"/></td>
+              <td>$3.50</td>
+            </tr>
+            <tr>
+              <td>⭐ Caramel Latte</td>
+              <td><input type="number" min="0" class="order-input" data-name="Caramel Latte" data-price="4.00"/></td>
+              <td>$4.00</td>
+            </tr>
+            <tr>
+              <td>Iced Americano</td>
+              <td><input type="number" min="0" class="order-input" data-name="Iced Americano" data-price="3.00"/></td>
+              <td>$3.00</td>
+            </tr>
+            <tr>
+              <td>⭐ Mocha</td>
+              <td><input type="number" min="0" class="order-input" data-name="Mocha" data-price="4.25"/></td>
+              <td>$4.25</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+            <!-- Pastries Section -->
+      <section class="order-section pastries-card">
+        <h3>🍰 Pastries & Baked Goods</h3>
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Pastry</th>
+              <th>Your Order</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>⭐ Blueberry Muffin</td>
+              <td><input type="number" min="0" class="order-input" data-name="Blueberry Muffin" data-price="2.75"/></td>
+              <td>$2.75</td>
+            </tr>
+            <tr>
+              <td>Chocolate Croissant</td>
+              <td><input type="number" min="0" class="order-input" data-name="Chocolate Croissant" data-price="3.00"/></td>
+              <td>$3.00</td>
+            </tr>
+            <tr>
+              <td>Cinnamon Roll</td>
+              <td><input type="number" min="0" class="order-input" data-name="Cinnamon Roll" data-price="3.25"/></td>
+              <td>$3.25</td>
+            </tr>
+            <tr>
+              <td>Banana Bread</td>
+              <td><input type="number" min="0" class="order-input" data-name="Banana Bread" data-price="2.50"/></td>
+              <td>$2.50</td>
+            </tr>
+            <tr>
+              <td>⭐ Cheesecake Slice</td>
+              <td><input type="number" min="0" class="order-input" data-name="Cheesecake Slice" data-price="4.50"/></td>
+              <td>$4.50</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <!-- Cart Summary -->
+  <div class="cart-summary-wrapper">
+  <div class="cart-card">
+    <h3>🛒 Cart Summary</h3>
+    <ul id="cart-list">
+      <li>No items yet.</li>
+    </ul>
+    <p>Total: $<span id="total-price">0.00</span></p>
+    <div class="cart-buttons">
+      <button id="place-order">Place Order</button>
+      <button id="cancel-order">Cancel Order</button>
+    </div>
+  </div>
+  </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bean & Brew. All rights reserved.</p>
+  </footer>
+
+  <script>
+  const toggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  toggle.addEventListener('click', function () {
+    toggle.classList.toggle('active');
+    navMenu.classList.toggle('hidden');
+  });
+  </script>
+
+  <script>
+    const inputs = document.querySelectorAll('input[type="number"]');
+    const cartList = document.getElementById('cart-list');
+    const totalPrice = document.getElementById('total-price');
+
+   function updateCart() {
+    let total = 0;
+    cartList.innerHTML = '';
+
+    let hasItems = false;
+
+    inputs.forEach(input => {
+      const qty = parseInt(input.value) || 0;
+      const name = input.dataset.name;
+      const price = parseFloat(input.dataset.price);
+
+      if (qty > 0) {
+        hasItems = true;
+        const itemTotal = qty * price;
+        total += itemTotal;
+
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${qty} × ${name} — $${itemTotal.toFixed(2)}</span>
+          <span class="cart-remove" data-name="${name}" style="cursor: pointer; margin-left: 10px;">✕</span>
+        `;
+
+         cartList.appendChild(li);
+
+        // Attach remove logic to each ❌ button
+         const removeBtn = li.querySelector('.cart-remove');
+        removeBtn.addEventListener('click', () => {
+          // Reset the corresponding input
+          inputs.forEach(input => {
+            if (input.dataset.name === name) {
+              input.value = '';
+            }
+          });
+          // Refresh cart
+          updateCart();
+        });
+
+        // Add remove functionality
+        cartList.querySelectorAll('.cart-remove').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const targetName = btn.dataset.name;
+            // Find the input with matching data-name
+            inputs.forEach(input => {
+              if (input.dataset.name === targetName) {
+                input.value = '';
+              }
+            });
+            updateCart(); // Refresh cart after removing
+          });
+        });
+
+        cartList.appendChild(li);
+      }
+    });
+
+    if (!hasItems) {
+      cartList.innerHTML = '<li>No items yet.</li>';
+    }
+
+    totalPrice.textContent = total.toFixed(2);
+  }
+
+  // Update cart whenever quantity changes
+  inputs.forEach(input => {
+    input.addEventListener('input', updateCart);
+  });
+
+  // Optional: alert when placing order
+  const placeOrderBtn = document.getElementById('place-order');
+  placeOrderBtn.addEventListener('click', () => {
+    if (parseFloat(totalPrice.textContent) === 0) {
+      alert('Please add at least one item to your order.');
+    } else {
+      alert('Thank you! Your order has been placed.');
+    }
+  });
+
+    document.getElementById("cancel-order").addEventListener("click", () => {
+    // Clear cart list
+    document.getElementById("cart-list").innerHTML = '<li>No items yet.</li>';
+
+    // Reset total price
+    document.getElementById("total-price").textContent = '0.00';
+
+    // Reset all number inputs across the order section (drinks + pastries)
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(input => input.value = 0);
+  });
+  </script>
+
+</body>
+</html>
